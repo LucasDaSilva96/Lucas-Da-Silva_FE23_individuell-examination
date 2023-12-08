@@ -1,0 +1,79 @@
+/* Import Font (Roboto) */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+
+/* Default settings */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Variables */
+:root {
+  --cta-bg-color: ##eeeeee;
+  --nav-text-color: #999;
+  --nav-active-text-color: #222222;
+  --text-grey-color: ##222222cc;
+  --text-black-color: #222222;
+}
+
+/* Header */
+.header {
+  width: 100%;
+  padding: 0.8rem;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__nav {
+  display: flex;
+  align-items: center;
+}
+
+.header__nav__wrapper__ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.header__nav__wrapper__ul__item--nav-item {
+  text-transform: uppercase;
+  color: var(--nav-text-color);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in;
+
+  &:hover {
+    color: var(--nav-active-text-color);
+  }
+}
+
+.header__nav__wrapper__ul__item--nav-item-active {
+  color: var(--nav-active-text-color);
+}
+
+.header__button--cta-btn {
+  width: 146px;
+  height: 40px;
+  text-transform: uppercase;
+  background-color: transparent;
+  font-size: 0.75rem;
+  border-radius: 3px;
+  border: 1px solid #000;
+  font-weight: 600;
+  transition: all 0.3s ease-in;
+  cursor: pointer;
+}
