@@ -26,7 +26,7 @@ body {
   --dark-white-color: #eeeeee;
   --white-color: #f5f5f5;
   --nav-active-text-color: #222222;
-  --text-grey-color: ##222222cc;
+  --text-grey-color: rgba(34, 34, 34, 0.8);
   --text-black-color: #222222;
   --light-red-color: #ff4554;
   --dark-red-color: #e60012;
@@ -45,11 +45,14 @@ body {
   background-color: transparent;
   backdrop-filter: blur(10px);
   transition: all 0.2s ease-in-out;
+  /* We need this for better browser-support */
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .header__aside__img--logo {
   mix-blend-mode: hard-light;
   filter: drop-shadow(-13px 9px 32px #000000);
+  cursor: pointer;
 }
 
 .header__nav {
@@ -400,10 +403,16 @@ body {
   display: grid;
   margin-top: 40px;
   max-width: 1100px;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  row-gap: 20px;
-  column-gap: 10px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  row-gap: 25px;
+  column-gap: 15px;
+  padding: 0 20px;
+
+  @media (min-width: 1100px) {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
 }
 
 .main-section__wrapper__box {
@@ -412,6 +421,16 @@ body {
   position: relative;
   text-align: center;
   cursor: pointer;
+}
+
+.main-section__wrapper__box--big-2 {
+  @media (max-width: 1100px) {
+    margin-top: -20px;
+  }
+
+  @media (max-width: 390px) {
+    padding: 0 5px;
+  }
 }
 
 .main-section__wrapper__box--small {
@@ -424,7 +443,9 @@ body {
 
 .main-section__wrapper__box__img {
   width: 100%;
-  height: 100%;
+  /* We need this in order for the images to render properly on iphone's */
+  max-height: 100%;
+  min-height: 100%;
   transition: transform 0.3s ease-in-out;
 }
 
@@ -454,25 +475,43 @@ body {
   place-content: center;
   gap: 10px;
   position: relative;
-
-  background-image: url("/src/img/rockstar-games-cover.webp");
-  background-position: center;
 }
 
-.main-section__wrapper__box--big-2 {
-  background-image: url("/src/img/capcom-cover.jpg");
+.main-section__wrapper__box__img--big {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.main-section__wrapper__box__img--medium-brightness {
+  filter: brightness(0.5);
+  transition: all 0.5s ease-in;
+}
+
+.main-section__wrapper__box__img--low-brightness {
+  filter: brightness(0.3);
+  transition: all 0.5s ease-in;
+}
+
+.main-section__wrapper__box--big:hover
+  .main-section__wrapper__box__img--medium-brightness,
+.main-section__wrapper__box--big:hover
+  .main-section__wrapper__box__img--low-brightness {
+  filter: brightness(1);
 }
 
 .main-section__wrapper__box--big__h3 {
   font-size: 2rem;
   color: var(--white-color);
   text-transform: uppercase;
+  z-index: 1;
 }
 
 .main-section__wrapper__box--big__p {
   color: rgba(255, 255, 255, 0.788);
   font-size: 1.125rem;
   font-weight: 400;
+  z-index: 2;
 }
 
 .main-section__wrapper__box--big__btn {
@@ -486,16 +525,163 @@ body {
   font-size: 0.75rem;
   font-weight: 500;
   text-transform: uppercase;
+  z-index: 3;
+  cursor: pointer;
+}
+
+/* Footer */
+.footer {
+  width: 100%;
+  height: 556px;
+  position: relative;
+  background-image: url("/src/img/footer-bg.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 470px) {
+    padding: 0 20px;
+  }
+
+  @media (min-width: 1100px) {
+    padding: 0 270px;
+    justify-content: flex-end;
+  }
+}
+
+.footer__form__wrapper {
+  max-width: 434px;
+  height: 417px;
+  background-color: var(--white-color);
+  z-index: 10;
+  border-radius: 3px;
+  box-shadow: 0px 0px 32px 0px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  padding: 5px 10px;
+  gap: 5px;
+}
+
+.footer__form__wrapper__h1,
+.footer__form__wrapper__h3,
+.footer__form__wrapper__p {
+  text-align: center;
+}
+
+.footer__form__wrapper__h1 {
+  font-size: 3.313rem;
+  font-size: 700;
+  color: var(--text-black-color);
+}
+
+.footer__form__wrapper__h3 {
+  font-size: 1.375rem;
+  color: var(--text-grey-color);
+
+  @media (max-width: 470px) {
+    font-size: 1rem;
+  }
+}
+
+.footer__form__wrapper__p {
+  font-size: 0.875rem;
+  color: var(--text-grey-color);
+}
+
+.footer__form__wrapper__form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer__form__wrapper__form__box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer__form__wrapper__form__box__svg {
+  max-width: 25px;
+  max-height: 25px;
+}
+
+/* Remove Arrows / Spinner */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.footer__form__wrapper__form__box__input {
+  border-radius: 3px;
+  outline: none;
+  border: 2px solid var(--blue-color);
+  padding: 5px;
+  background-color: var(--dark-white-color);
+  transition: all 0.1s linear;
+
+  &:focus {
+    background-color: #fff;
+  }
+}
+
+.footer__form__wrapper__form__box__textarea {
+  border: 2px solid var(--blue-color);
+  padding: 5px;
+  outline: none;
+  border-radius: 3px;
+  resize: none;
+  background-color: var(--dark-white-color);
+  transition: all 0.1s linear;
+
+  &:focus {
+    background-color: #fff;
+  }
+}
+
+.footer__form__wrapper__form__btn {
+  width: 150px;
+  height: 30px;
+  background-color: var(--blue-color);
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  text-transform: uppercase;
+  align-self: center;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  color: var(--text-black-color);
+
+  &:focus {
+    background-color: var(--light-red-color);
+    transform: scale(1.02);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+      rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+      rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  }
+
+  &:hover {
+    background-color: var(--light-red-color);
+    transform: scale(1.02);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+      rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+      rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  }
 }
 
 /* Reusable-classes */
 .shadow {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
     rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
-}
-
-.blur-bg {
-  backdrop-filter: blur(8px);
 }
 
 /* Media-queries */

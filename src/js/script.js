@@ -1,6 +1,7 @@
 // DOM selection
 const cta_section = document.querySelector(".cta-section");
 const header = document.querySelector(".header");
+const logo = document.querySelector(".header__aside");
 
 // Determine if an element is in the visible viewport
 function isInViewport(element) {
@@ -22,4 +23,9 @@ window.addEventListener("scroll", () => {
   } else {
     header.classList.remove("shadow");
   }
+});
+
+// Scroll back to the top/call-to-action-section
+logo.addEventListener("click", () => {
+  cta_section.scrollIntoView();
 });
