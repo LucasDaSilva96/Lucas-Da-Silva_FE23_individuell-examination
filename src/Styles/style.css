@@ -534,7 +534,7 @@ body {
   width: 100%;
   height: 556px;
   position: relative;
-  background-image: url("./src/img/footer-bg.png");
+  background-image: url("./src./img/footer-bg.png");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
